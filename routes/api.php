@@ -29,5 +29,9 @@ Route::get('/hello', function(){
     return "hello word";
 });
 
-Route::apiResource('/mahasiswa', MahasiswaController::class);
 Route::post('/login', [ApiAuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('/mahasiswa', MahasiswaController::class);
+    Route::get('/logout', [ApiAuthController::class, 'logout']);
+});
